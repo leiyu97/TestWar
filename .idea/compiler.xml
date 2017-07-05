@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="jboss-wsat-simple" />
+        <module name="jboss-wsat-simple (1)" />
+        <module name="jboss-wsat-simple (2)" />
+        <module name="my-app" />
+        <module name="TestJar" />
+        <module name="TestWar" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="client" target="1.8" />
+      <module name="ejb-client" target="1.8" />
+      <module name="ejbclient" target="1.5" />
+      <module name="jboss-wsat-simple" target="1.6" />
+      <module name="jboss-wsat-simple-EAP7" target="1.8" />
+      <module name="jboss-wsat-simple-eap7" target="1.8" />
+      <module name="my-app" target="1.7" />
+      <module name="playground" target="1.5" />
+      <module name="playground-mbean" target="1.8" />
+      <module name="playground-mbean-ear" target="1.8" />
+      <module name="playground-mbean-ejb" target="1.8" />
+      <module name="TestJar" target="1.5" />
+      <module name="TestWar" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

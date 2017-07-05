@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+    <context-root>/TestWar</context-root>
+    <!--security-domain>ADRealm</security-domain-->
+    <security-domain>other</security-domain>
+</jboss-web>

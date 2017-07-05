@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
+  <component name="IdProvider" IDEtalkID="B1D5FDC9359233E97501AB9D67352B1B" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/TestJar/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap-quickstarts/ejb-remote/pom.xml" />
+        <option value="$PROJECT_DIR$/../../testApps/my-app/pom.xml" />
+        <option value="/data/case_download/numbers/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap-6.4.0.GA-quickstarts/wsat-simple/pom.xml.orig" />
+        <option value="/data/case_download/temp/joerge_test/playground/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="/data/case_download/temp/joerge_test/playground/playground-mbean/ear/pom.xml" />
+        <option value="/data/case_download/temp/joerge_test/playground/playground-mbean/ejb-client/pom.xml" />
+        <option value="/data/case_download/temp/joerge_test/playground/playground-mbean/ejb/pom.xml" />
+        <option value="/data/case_download/temp/joerge_test/playground/playground-mbean/pom.xml" />
+        <option value="/data/case_download/temp/joerge_test/playground/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap-quickstarts/ejb-remote/client/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap-quickstarts/ejb-remote/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap-quickstarts/ejb-remote/server-side/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/common-domain/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/common/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/container-embedded/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/container-managed-domain/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/container-managed/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/container-remote-domain/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/container-remote/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/protocol-jmx/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/testenricher-msc/pom.xml" />
+        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/testng-integration/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

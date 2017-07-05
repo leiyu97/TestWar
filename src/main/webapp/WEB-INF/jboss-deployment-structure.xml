@@ -1,0 +1,11 @@
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <!--module name="org.picketbox"/-->
+
+        </dependencies>
+        <!--exclusions>
+            <module name="javax.servlet.jstl.api"/>
+        </exclusions-->
+    </deployment>
+</jboss-deployment-structure>

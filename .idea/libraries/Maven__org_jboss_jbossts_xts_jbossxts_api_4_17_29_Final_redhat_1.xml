@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.jboss.jbossts.xts:jbossxts:api:4.17.29.Final-redhat-1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jboss/jbossts/xts/jbossxts/4.17.29.Final-redhat-1/jbossxts-4.17.29.Final-redhat-1-api.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jboss/jbossts/xts/jbossxts/4.17.29.Final-redhat-1/jbossxts-4.17.29.Final-redhat-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jboss/jbossts/xts/jbossxts/4.17.29.Final-redhat-1/jbossxts-4.17.29.Final-redhat-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

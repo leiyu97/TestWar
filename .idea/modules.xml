@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TestJar/TestJar.iml" filepath="$PROJECT_DIR$/TestJar/TestJar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestWar.iml" filepath="$PROJECT_DIR$/TestWar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../jboss-eap-6.4.0.GA-quickstarts/wsat-simple/jboss-wsat-simple.iml" filepath="$PROJECT_DIR$/../../jboss-eap-6.4.0.GA-quickstarts/wsat-simple/jboss-wsat-simple.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../testApps/my-app/my-app.iml" filepath="$PROJECT_DIR$/../../testApps/my-app/my-app.iml" />
+    </modules>
+  </component>
+</project>

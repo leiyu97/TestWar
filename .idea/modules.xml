@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/client/TestClient.iml" filepath="$PROJECT_DIR$/client/TestClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/TestJar/TestJar.iml" filepath="$PROJECT_DIR$/server/TestJar/TestJar.iml" />
       <module fileurl="file://$PROJECT_DIR$/TestJar/TestJar.iml" filepath="$PROJECT_DIR$/TestJar/TestJar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/TestServer.iml" filepath="$PROJECT_DIR$/server/TestServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/TestWar.iml" filepath="$PROJECT_DIR$/TestWar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../jboss-eap-6.4.0.GA-quickstarts/wsat-simple/jboss-wsat-simple.iml" filepath="$PROJECT_DIR$/../../jboss-eap-6.4.0.GA-quickstarts/wsat-simple/jboss-wsat-simple.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../testApps/my-app/my-app.iml" filepath="$PROJECT_DIR$/../../testApps/my-app/my-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestWeb/TestWeb.iml" filepath="$PROJECT_DIR$/TestWeb/TestWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../ThreadLogic/threadlogic25_maven/threadlogic.iml" filepath="$PROJECT_DIR$/../../ThreadLogic/threadlogic25_maven/threadlogic.iml" />
     </modules>
   </component>
 </project>

@@ -6,7 +6,10 @@
     <groupId>org.larinia</groupId>
     <artifactId>TestWar</artifactId>
     <version>1</version>
-    <packaging>war</packaging>
+    <modules>
+        <module>TestWeb</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <properties>
         <spring-framework.version>4.0.3.RELEASE</spring-framework.version>
@@ -14,18 +17,10 @@
         <slf4j-log4j12.version>1.6.2</slf4j-log4j12.version>
     </properties>
 
+
+
     <dependencies>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.picketbox</groupId>
-            <artifactId>picketbox</artifactId>
-            <version>4.0.17.SP2-redhat-2</version>
-            <scope>compile</scope>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
@@ -34,87 +29,32 @@
         <!--dependency> <groupId>org.apache</groupId> <artifactId>httpclient</artifactId>
             <version>4.3.2</version> </dependency -->
         <!-- testing mybatis -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <!--version>3.4.0</version -->
-            <version>3.4.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.ibatis</groupId>
-            <artifactId>ibatis-core</artifactId>
-            <version>3.0</version>
-        </dependency>
 
 
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
-        </dependency>
+
+
+
 
         <!-- tag lib -->
         <!--dependency> <groupId>org.apache.taglibs</groupId> <artifactId>taglibs-standard-jstlel</artifactId>
             <version>1.2.5</version> </dependency -->
         <!-- Spring -->
 
-        <!-- Spring and Transactions -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring-framework.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring-framework.version}</version>
-        </dependency>
-
-        <!-- Spring ORM support -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring-framework.version}</version>
-        </dependency>
-
-        <!-- Hibernate -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>org.jboss.logging</artifactId>
-                    <groupId>jboss-logging</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <dependency>
 
 
-            <artifactId>TestJar</artifactId>
-            <groupId>org.larinia</groupId>
-            <version>1</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.jboss</groupId>
             <artifactId>jboss-ejb-client</artifactId>
-            <version>2.1.6.Final-redhat-1</version>
-            <scope>provided</scope>
+            <version>1.0.32.Final-redhat-1</version>
+            <scope>runtime</scope>
         </dependency>
+        <!--dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-client-all</artifactId>
+            <version>7.5.6.Final-redhat-2</version>
+        </dependency-->
 
 
         <dependency>
@@ -149,54 +89,15 @@
             <artifactId>picketlink-federation</artifactId>
             <version>2.5.5</version>
         </dependency-->
-        <dependency>
-            <groupId>org.picketbox</groupId>
-            <artifactId>picketbox</artifactId>
-            <version>4.0.17.SP2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
-            <version>3.3.0.Final-redhat-1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
+
+
+        <!--dependency>
             <groupId>org.picketbox</groupId>
             <artifactId>picketbox</artifactId>
             <version>5.0.0.Alpha2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.picketbox</groupId>
-            <artifactId>picketbox</artifactId>
-            <version>5.0.0.Alpha2</version>
-        </dependency>
+        </dependency-->
+
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <excludes>
-                        <exclude>org/larinia/ejb/TestMBean*.java</exclude>
-                        <exclude>org/larinia/ejb/TestEcho*.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-    <repositories>
-        <repository>
-            <id>red hat jboss maven repos</id>
-            <url>https://maven.repository.redhat.com/ga/</url>
-            <name>jboss maven repos</name>
-
-        </repository>
-    </repositories>
 </project>

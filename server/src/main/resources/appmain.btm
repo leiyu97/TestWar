@@ -1,0 +1,31 @@
+RULE trace main entry
+CLASS AppMain
+METHOD main
+AT ENTRY
+IF true
+DO traceln("entering main")
+ENDRULE
+
+RULE trace main exit
+CLASS AppMain
+METHOD main
+AT EXIT
+IF true
+DO traceln("exiting main")
+ENDRULE
+
+RULE trace printSomething entry
+CLASS AppMain
+METHOD printSomething
+AT ENTRY
+IF true
+DO traceln("IN PRINTSOMTHING")
+ENDRULE
+
+RULE trace printSomething exit
+CLASS AppMain
+METHOD printSomething
+AT EXIT
+IF true
+DO traceln("OUT PRINTSOMTHING")
+ENDRULE

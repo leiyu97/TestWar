@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.larinia</groupId>
+    <artifactId>TestServer</artifactId>
+    <packaging>ejb</packaging>
+    <version>1</version>
+
+    <properties>
+        <spring-framework.version>4.0.3.RELEASE</spring-framework.version>
+        <hibernate.version>4.2.0.Final</hibernate.version>
+        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+        <version.ejb.plugin>2.3</version.ejb.plugin>
+        <maven.compile.version>1.8</maven.compile.version>
+    </properties>
+
+    <!--packaging>war</packaging-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${maven.compile.version}</source>
+                    <target>${maven.compile.version}</target>
+                    <excludes>
+                        <exclude>org/larinia/ejb/TestMBean*.java</exclude>
+                        <exclude>org/larinia/ejb/TestEcho*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- WildFly plug-in to deploy the application -->
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${version.wildfly.maven.plugin}</version>
+                <configuration>
+                    <filename>${project.build.finalName}.jar</filename>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>${version.ejb.plugin}</version>
+                <configuration>
+                    <ejbVersion>3.1</ejbVersion>
+                    <!-- this is false by default -->
+                    <generateClient>true</generateClient>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>red hat jboss maven repos</id>
+            <url>https://maven.repository.redhat.com/ga/</url>
+            <name>jboss maven repos</name>
+
+        </repository>
+    </repositories>
+
+    <!-- added-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Define the version of the JBoss Java EE APIs we want to use -->
+            <!-- JBoss distributes a complete set of Java EE APIs including
+                a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or
+                a collection) of artifacts. We use this here so that we always get the correct
+                versions of artifacts. Here we use the jboss-javaee-7.0 stack (you can
+                read this as the JBoss stack of the Java EE APIs). You can actually
+                use this stack with any version of JBoss EAP that implements Java EE. -->
+            <dependency>
+                <groupId>org.jboss.spec</groupId>
+                <artifactId>jboss-javaee-7.0</artifactId>
+                <version>1.0.3.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <artifactId>TestJar</artifactId>
+            <groupId>org.larinia</groupId>
+            <version>1</version>
+        </dependency>
+
+        <!-- Import the Common Annotations API (JSR-250), we use provided scope
+            as the API is included in JBoss EAP -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.annotation</groupId>
+            <!-- EAP 6.4.20-->
+            <artifactId>jboss-annotations-api_1.1_spec</artifactId>
+            <version>1.0.1.Final-redhat-3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Import the EJB API, we use provided scope as the API is included in JBoss EAP -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.ejb</groupId>
+            <!-- EAP 6.4.20-->
+            <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+            <version>1.0.2.Final-redhat-3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--app libs-->
+        <dependency>
+            <groupId>org.apache.ibatis</groupId>
+            <artifactId>ibatis-core</artifactId>
+            <version>3.0</version>
+        </dependency>
+
+        <!--dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId-->
+        <!--version>3.4.0</version -->
+        <!--version>3.4.1</version>
+    </dependency-->
+
+        <!-- Spring and Transactions -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-framework.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+
+        <!-- Spring ORM support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.picketbox</groupId>
+            <artifactId>picketbox</artifactId>
+            <version>4.1.7.Final-redhat-1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency-->
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org.jboss.logging</artifactId>
+                    <groupId>jboss-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.3.0.Final-redhat-1</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+
+
+</project>

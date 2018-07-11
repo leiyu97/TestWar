@@ -9,12 +9,11 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/TestJar/pom.xml" />
-        <option value="$PROJECT_DIR$/../../jboss-eap-quickstarts/ejb-remote/pom.xml" />
-        <option value="$PROJECT_DIR$/../../testApps/my-app/pom.xml" />
         <option value="/data/case_download/numbers/pom.xml" />
-        <option value="$PROJECT_DIR$/../../jboss-eap/arquillian/pom.xml" />
-        <option value="$PROJECT_DIR$/../../jboss-eap-6.4.0.GA-quickstarts/wsat-simple/pom.xml.orig" />
-        <option value="/data/case_download/temp/joerge_test/playground/pom.xml" />
+        <option value="$PROJECT_DIR$/client/pom.xml" />
+        <option value="$PROJECT_DIR$/server/pom.xml" />
+        <option value="$PROJECT_DIR$/server/TestJar/pom.xml" />
+        <option value="$PROJECT_DIR$/../../ThreadLogic/threadlogic25_maven/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -41,7 +40,7 @@
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

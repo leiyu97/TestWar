@@ -44,12 +44,6 @@
 
 
 
-        <dependency>
-            <groupId>org.jboss</groupId>
-            <artifactId>jboss-ejb-client</artifactId>
-            <version>1.0.32.Final-redhat-1</version>
-            <scope>runtime</scope>
-        </dependency>
         <!--dependency>
             <groupId>org.jboss.as</groupId>
             <artifactId>jboss-as-client-all</artifactId>

@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="org.larinia.servlet.HelloWorldFrame" %>
 <%
     Object counterObj = session.getAttribute("counter");
     int counter = 0;
@@ -25,10 +24,6 @@
 
                      System.out.println("AHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                    }
-
-
-            new HelloWorldFrame();
-
 
                 %-->
                 <% System.out.println("System.getProperties() is ######## "+System.getProperties());%>

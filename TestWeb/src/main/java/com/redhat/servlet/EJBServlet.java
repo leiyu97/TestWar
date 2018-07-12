@@ -39,7 +39,7 @@ public class EJBServlet extends HttpServlet {
        // Properties props = new Properties();
 
 
-       // props.put(Context.INITIAL_CONTEXT_FACTORY,  "org.wildfly.naming.client.WildFlyInitialContextFactory");
+       //props.put(Context.INITIAL_CONTEXT_FACTORY,  "org.wildfly.naming.client.WildFlyInitialContextFactory");
         //props.put(Context.PROVIDER_URL, "https-remoting://"+host+":"+port);
 
 
@@ -69,7 +69,7 @@ public class EJBServlet extends HttpServlet {
     public CallerLocal getAdapter() throws NamingException {
         if(callerLocal == null) {
 
-            System.out.println("EJBServlet.getAdapter Creating new  client stub.");
+            System.out.println("EJBServlet.getAdapter : just in ");
 
             callerLocal = EJBLookupFactory.createEjbRemotingWrapper(props);
         }

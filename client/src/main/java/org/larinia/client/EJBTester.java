@@ -108,6 +108,8 @@ public class EJBTester {
         String lookupCallString ="ejb:/TestServer-1/CallerBean!"+CallerLocal.class.getName();
         //String lookupCallString ="TestWar-1/CallerBean!"+CallerLocal.class.getName();
 
+
+
         CallerLocal callerLocal = (CallerLocal)ctx.lookup(lookupCallString);
 
        String resturnString= callerLocal.testMethod("Testing Caller Bean from the client side");

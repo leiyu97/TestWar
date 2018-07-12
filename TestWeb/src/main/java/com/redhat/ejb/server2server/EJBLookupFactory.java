@@ -23,18 +23,19 @@ public class EJBLookupFactory {
     private static Properties createJNDIProperties(Hashtable<?, ?> props) {
         Properties jndiProperties = new Properties();
         jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-
+        //lay added for eap 7.1
+        //jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY,  "org.wildfly.naming.client.WildFlyInitialContextFactory");
         if (props != null) {
             jndiProperties.putAll(props);
         }
-        LOG.debug("getJNDIProperties mit erweiterten Properties: {}"+ jndiProperties);
+        System.out.println("EJBLookupFactory.createJNDIProperties getJNDIProperties mit erweiterten Properties: {}"+ jndiProperties);
 
         return jndiProperties;
     }
 
     private static String createWrapperJNDIName(String beanName, String viewClassName) {
-        String jndiName = "ejb:" + APP_NAME + "/" + beanName + "!" + viewClassName;
-        LOG.debug("Create JNDI Name: {}"+jndiName);
+        String jndiName = "ejb:/" + APP_NAME + "/" + beanName + "!" + viewClassName;
+        System.out.println("EJBLookupFactory.createWrapperJNDIName Create JNDI Name: {}"+jndiName);
 
         return jndiName;
     }
@@ -49,9 +50,10 @@ public class EJBLookupFactory {
             context = new InitialContext(jndiProperties);
 
             String jndiName = createWrapperJNDIName(BEAN_NAME_CALLER, VIEW_CLASS_NAME);
-            LOG.debug("Looking EJB via JNDI => {}"+jndiName);
+            System.out.println("EJBLookupFactory.createEjbRemotingWrapper Looking EJB via JNDI => {}"+jndiName);
+            Object o = context.lookup(jndiName);
 
-            return (CallerLocal)context.lookup(jndiName);
+            return (CallerLocal)o;
         } finally {
             if (context != null) {
                 context.close();

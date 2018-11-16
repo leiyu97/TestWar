@@ -33,6 +33,8 @@ public class EJBServlet extends HttpServlet {
 
 
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        int count=0;
+        System.out.println("EJBServlet.service: just in "+count++);
         PrintWriter out = res.getWriter();
 
 

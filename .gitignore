@@ -1,6 +1,9 @@
-/target
+target/
 .idea
 .idea/
 *.log
 .settings
 .settings/
+.classpath
+.project
+TestWar.iml

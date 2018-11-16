@@ -7,20 +7,22 @@ import java.util.Properties;
 
 import javax.naming.*;
 
-
-/**
- * Created by lyu on 12/08/16.
- */
-
+import org.jboss.ejb.client.EJBClientConfiguration;
+import org.jboss.ejb.client.PropertiesBasedEJBClientConfiguration;
+import org.jboss.ejb.client.ContextSelector;
+import org.jboss.ejb.client.EJBClientContext;
+import org.jboss.ejb.client.remoting.ConfigBasedEJBClientContextSelector;
 
 import org.larinia.ejb.AnotherEJB;
 import org.larinia.ejb.CallerLocal;
+import org.larinia.ejbTimer.Timeout;
 
 public class EJBTester {
 
-    BufferedReader brConsoleReader = null;
+    BufferedReader brConsoleReader;
     Properties props;
-    InitialContext ctx;
+    private InitialContext ctx;
+    CallerLocal clProxy;
 /*
     {
         props = new Properties();
@@ -80,9 +82,11 @@ public class EJBTester {
         }
     }
 
-
+    /*
+     * this uses EJB client properties
+     */
     private static void testEJBClient() throws Exception {
-        System.out.println("*** EJB Client API ***");
+        System.out.println("*** EJB Client  ***");
 
         // Hashtable<String, String> env = new Hashtable<String, String>();
 
@@ -93,36 +97,118 @@ public class EJBTester {
 
 
         //  String lookupoString="ejb:/TestWar-1//AntherEJBImpl!"+AnotherEJB.class.getName();
-      //  String lookupoString = "ejb:/TestWar-1//AntherEJBImpl!" + AnotherEJB.class.getName();
+        //  String lookupoString = "ejb:/TestWar-1//AntherEJBImpl!" + AnotherEJB.class.getName();
 
 
         //java:app/TestWar-1/AntherEJBImpl!org.larinia.ejb.AnotherEJB
-      //  AnotherEJB aejb = (AnotherEJB) ctx.lookup(lookupoString);
+        //  AnotherEJB aejb = (AnotherEJB) ctx.lookup(lookupoString);
 
         //System.out.println(aeb.testMyMethod());
 
-    //    aejb.testMyMethod();
+        //    aejb.testMyMethod();
 
         //try callerbean
 
-        String lookupCallString ="ejb:/TestServer-1/CallerBean!"+CallerLocal.class.getName();
+        String lookupCallString = "ejb:/TestServer-1/CallerBean!" + CallerLocal.class.getName();
         //String lookupCallString ="TestWar-1/CallerBean!"+CallerLocal.class.getName();
 
 
+        CallerLocal callerLocal = (CallerLocal) ctx.lookup(lookupCallString);
 
-        CallerLocal callerLocal = (CallerLocal)ctx.lookup(lookupCallString);
+        String resturnString = callerLocal.testMethod("Testing Caller Bean from the client side");
+        System.out.println("response from callerbean is " + resturnString);
 
-       String resturnString= callerLocal.testMethod("Testing Caller Bean from the client side");
-        System.out.println("response from callerbean is "+resturnString);
-
-        System.out.println("*** EJB Client API ***");
+        System.out.println("*** EJB Client ***");
     }
+
+    /*
+    Using JBoss EJB Client API to programatically configure (Recommended)
+     */
+
+    public void initEJBClient() {
+        Properties p = new Properties();
+        p.put("remote.connections", "node1");
+        p.put("remote.connection.node1.port", "4447");  // the default remoting port, replace if necessary
+        p.put("remote.connection.node1.host", "localhost");  // the host, replace if necessary
+        p.put("remote.connectionprovider.create.options.org.xnio.Options.SSL_ENABLED", "false"); // the server defaults to SSL_ENABLED=false
+
+        EJBClientConfiguration cc = new PropertiesBasedEJBClientConfiguration(p);
+        ContextSelector<EJBClientContext> selector = new ConfigBasedEJBClientContextSelector(cc);
+        EJBClientContext.setSelector(selector);
+    }
+
+
+    public void setProxy() throws NamingException {
+        Properties contextProperties = new Properties();
+        contextProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+        Context context = new InitialContext(contextProperties);
+         clProxy  = (CallerLocal) context.lookup("ejb:/TestServer-1/CallerBean!" + CallerLocal.class.getName());
+    }
+
+    public void myBusinessInvocation() {
+
+        System.out.println(clProxy.testMethod("Testing ejb client API"));
+
+    }
+
+    public void cleanupEJBClient() throws IOException {
+        EJBClientContext.getCurrent().close();
+    }
+    /*
+    Configuring using scoped context in the client code EAP 6.1+ ejb: protocol
+    Note that if EJB applications are used on multiple servers (in non-clustered EJB case) then for 3-server case
+    p.put("remote.connections", "node1"); would be changed to p.put("remote.connections", "node1,node2,node3");
+    and host, port, username, password, connect.options, etc. above would contain entries for each of node1,node2, node3.
+     */
+    private static void testEJBScoped() throws Exception {
+        Properties p = new Properties();
+        p.put("remote.connections", "node1");
+        p.put("remote.connection.node1.port", "4447");  // the default remoting port, replace if necessary
+        p.put("remote.connection.node1.host", "localhost");  // the host, replace if necessary
+        p.put("remote.connectionprovider.create.options.org.xnio.Options.SSL_ENABLED", "false"); // the server defaults to SSL_ENABLED=false
+        p.put("remote.connection.node1.connect.options.org.xnio.Options.SASL_POLICY_NOANONYMOUS", "false");
+
+        //if security domain is used
+        //p.put("remote.connection.node1.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT", "false");
+
+//these 2 lines below are not necessary, if security-realm is removed from remoting-connector
+        p.put("remote.connection.node1.username", "user");
+        p.put("remote.connection.node1.password", "password");
+
+
+        p.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+        p.put("org.jboss.ejb.client.scoped.context", true); // enable scoping here
+
+        Context context = new InitialContext(p);
+        Context ejbRootNamingContext = (Context) context.lookup("ejb:");
+        try
+
+        {
+            final Timeout bean = (Timeout) ejbRootNamingContext.lookup("TestTimer/TestTimerEJB/TimerExampleBean!org.example.jboss.timer.TimerExample");
+            bean.initialize();
+        } finally
+
+        {
+            try {
+                ejbRootNamingContext.close();
+            } catch (Exception e) {
+            }
+            try {
+                context.close();
+            } catch (Exception e) {
+            }
+        }
+
+    }
+    /*
+     * this uses the remote naming, it is not recommended method
+     */
 
     private static void testRemoteNaming() throws Exception {
         System.out.println("*** Remote Naming API ***");
         Hashtable<String, String> env = new Hashtable<String, String>();
 
-        env.put("java.naming.factory.initial", "org.jboss.naming.remote.client.InitialContextFactory");
+        env.put("java.naming.factory.initial", "org.jboss.naming.remote.client.InitialContextFactory"); //this is the remote naming part
         env.put("java.naming.provider.url", "remote://totoro.usersys.redhat.com:4547");
         // env.put("java.naming.provider.url", "https-remoting://totoro.usersys.redhat.com:8443");
         env.put("jboss.naming.client.ejb.context", "true");
@@ -145,7 +231,7 @@ public class EJBTester {
 
 
         //env.put(Context.SECURITY_PRINCIPAL, "admin");
-       // env.put(Context.SECURITY_CREDENTIALS, "Admin123$");
+        // env.put(Context.SECURITY_CREDENTIALS, "Admin123$");
 
         InitialContext ctx = new InitialContext(env);
 
@@ -160,7 +246,7 @@ public class EJBTester {
         //       System.out.println("binding_list:"+binding_list);
 
         String lookupoString = "TestServer-1/CallerBean!org.larinia.ejb.CallerLocal";
-         //java:global/TestServer-1/CallerBean!org.larinia.ejb.CallerLocal
+        //java:global/TestServer-1/CallerBean!org.larinia.ejb.CallerLocal
 
         //java:global/TestWar-1/CallerBean!org.larinia.ejb.CallerLocal
 
@@ -175,7 +261,7 @@ public class EJBTester {
 
         System.out.println("*** end Remote Naming API ***");
 
-      //  invokeMyBean();
+        //  invokeMyBean();
     }
 
     // This method works with eap 7, the bean itself have annotations such as allowedroles
